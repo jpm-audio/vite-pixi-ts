@@ -1,15 +1,17 @@
 // https://vite.dev/config/
 
+import packageJson from './package.json';
+
 /** @type {import('vite').UserConfig} */
 export default {
   // root: './',
-  // base: './',
+  base: '',
   // publicDir: './public',
   // cacheDir: "node_modules/.vite",
   // envDir: "./",
   mode: 'development', // 'development' | 'production'
   define: {
-    __APP_VERSION__: JSON.stringify('v0.0.0'),
+    __APP_VERSION__: JSON.stringify(packageJson.version),
   },
   // plugins: [],
   resolve: {
@@ -72,12 +74,12 @@ export default {
     // target:'modules',
     // modulePreload: { polyfill: true },
     // polyfillModulePreload: true,
-    // outDir: 'dist', // Specify the output directory (relative to project root).
-    // assetsDir: 'assets', // Specify the directory to nest generated assets under (relative to build.outDir. This is not used in Library Mode).
-    // assetsInlineLimit: 4096 // Imported or referenced assets that are smaller than this threshold will be inlined as base64 URLs to avoid extra http requests. Set to 0 to disable inlining altogether.
+    outDir: 'dist', // Specify the output directory (relative to project root).
+    assetsDir: 'assets', // Specify the directory to nest generated assets under (relative to build.outDir. This is not used in Library Mode).
+    assetsInlineLimit: 4096, // Imported or referenced assets that are smaller than this threshold will be inlined as base64 URLs to avoid extra http requests. Set to 0 to disable inlining altogether.
     cssCodeSplit: false, // Enable CSS code splitting. If disabled, all CSS in the entire project will be extracted into a single CSS file.
     // cssTarget: 'module', // This option allows users to set a different browser target for CSS minification from the one used for JavaScript transpilation.
-    // cssMinify: true, // This option allows users to override CSS minification. Default: the same as build.minify
+    //cssMinify: 'esbuild', // This option allows users to override CSS minification. Default: the same as build.minify
     // sourcemap: false, // boolean | 'inline' | 'hidden'
     rollupOptions: {},
     // commonjsOptions: {},
@@ -87,12 +89,12 @@ export default {
     // ssrManifest: false,
     // ssr: false,
     // ssrEmitAssets: false,
-    // minify: 'esbuild', // Set to false to disable minification, or specify the minifier to use.
+    minify: 'esbuild', //false, // Set to false to disable minification, or specify the minifier to use.
     // terserOptions: {},
     // write: true,
-    // emptyOutDir: true, // Vite will empty the outDir on build if it is inside project root.
+    emptyOutDir: true, // Vite will empty the outDir on build if it is inside project root.
     // copyPublicDir: true, // Vite will copy files from the publicDir into the outDir on build.
-    // reportCompressedSize: true // Enable/disable gzip-compressed size reporting.
+    reportCompressedSize: true, // Enable/disable gzip-compressed size reporting.
     // chunkSizeWarningLimit: 500 // Limit for chunk size warnings (in kB).
     // watch: null // Set to {} to enable rollup watcher.
   },
@@ -110,7 +112,10 @@ export default {
     entries: [], // Vite will crawl all your .html files to detect dependencies that need to be pre-bundled.
     //exclude: [], // Dependencies to exclude from pre-bundling.
     //include: [], // By default, linked packages not inside node_modules are not pre-bundled. Use this option to force a linked package to be pre-bundled.
-    //esbuildOptions: {}, // Options to pass to esbuild during the dep scanning and optimization.
+    esbuildOptions: {
+      minify: true,
+      keepNames: true,
+    }, // Options to pass to esbuild during the dep scanning and optimization.
     //force: false, // Set to true to force dependency pre-bundling, ignoring previously cached optimized dependencies.
     //holdUntilCrawlEnd: true, // When enabled, it will hold the first optimized deps results until all static imports are crawled on cold start.
     //needsInterop: [], // Forces ESM interop when importing these dependencies.

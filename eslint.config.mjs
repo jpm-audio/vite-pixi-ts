@@ -10,12 +10,24 @@ export default [
   {
     ignores: ['dist/'],
   },
-  //{
-  //  rules: {
-  //    'no-non-null-assertion': 'off',
-  //    'no-unused-imports-ts': 'warn',
-  //    'no-unused-vars': 'warn',
-  //    'no-undef': 'warn',
-  //  },
-  //},
+  {
+    rules: {
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          args: 'all',
+          argsIgnorePattern: '^_',
+          caughtErrors: 'all',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+        },
+      ],
+      //    'no-non-null-assertion': 'off',
+      //    'no-unused-imports-ts': 'warn',
+      //"no-unused-vars": "off",
+      //    'no-undef': 'warn',
+    },
+  },
 ];
