@@ -1,11 +1,6 @@
+# vite-pixi-ts
 
-# Solitaire
-
-Solitaire web game by Sandbox Group. 
-
-The classic Solitaire card game created to be played online on browsers for any device.
-
-
+Vite + Pixi.js + Typescript boilerplate
 
 ## Run
 
